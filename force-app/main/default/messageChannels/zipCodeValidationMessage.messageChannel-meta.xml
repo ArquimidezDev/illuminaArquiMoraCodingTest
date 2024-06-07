@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>ZipCodeValidationMessage</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Lightning Message Channel to communicate Zip Code Validation response.</description>
+    <lightningMessageFields>
+        <fieldName>response</fieldName>
+        <description>Zip Code Validation WebService response.</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

@@ -1,0 +1,19 @@
+<template>
+
+    <lightning-card>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-12"></div>
+            <div class="slds-col slds-size_10-of-12">
+                <lightning-input type="text" name="zipCode" label="Enter Zip Code" onchange={handleZipCodeChange} required></lightning-input>
+                <lightning-select
+                    name="country"
+                    label="Select Country"
+                    value={country}
+                    options={countryList} onchange={handleCountryChange}></lightning-select>
+                <br/>
+                <lightning-button variant="brand" label="Zip Code Validation" onclick={handleValidationClick} class="slds-float_right"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+
+</template>

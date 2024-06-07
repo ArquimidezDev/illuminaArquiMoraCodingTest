@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalServiceRegistration xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Calls Zippopotam API to validate a Zip Code string</description>
+    <label>ZipCodeValidation</label>
+    <namedCredentialReference>Zippopotam</namedCredentialReference>
+    <operations>
+        <active>true</active>
+        <name>zipcodevalidation</name>
+    </operations>
+    <registrationProviderType>Custom</registrationProviderType>
+    <schema>{
+  &quot;openapi&quot;: &quot;3.0.0&quot;,
+  &quot;info&quot;: {
+    &quot;title&quot;: &quot;Zip Code Validation Call&quot;,
+    &quot;description&quot;: &quot;Validates provided Zip Code for the indicated Country through the Zippopotam API&quot;,
+    &quot;version&quot;: 1,
+    &quot;contact&quot;: &quot;arquimidez@outlook.com&quot;
+  },
+  &quot;servers&quot;: [{
+    &quot;url&quot;: &quot;https://api.zippopotam.us/&quot;,
+    &quot;description&quot;: &quot;Zip Code Validation Endpoint&quot;
+  }],
+  &quot;paths&quot;: {
+    &quot;/{strCountry}/{strZipCode}&quot;: {
+      &quot;get&quot;: {
+        &quot;operationId&quot;: &quot;zipCodeValidation&quot;,
+        &quot;tags&quot;: [
+          &quot;Zip Code Validation&quot;
+        ],
+        &quot;summary&quot;: &quot;Validates provided Zip Code for the indicated Country&quot;,
+        &quot;externalDocs&quot;: {
+          &quot;description&quot;: &quot;API Spec page&quot;,
+          &quot;url&quot;: &quot;https://api.zippopotam.us/&quot;
+        },
+        &quot;parameters&quot;: [{
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;strCountry&quot;,
+            &quot;schema&quot;: {
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;required&quot;: true,
+            &quot;description&quot;: &quot;Country for the Zip Code validation&quot;
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;strZipCode&quot;,
+            &quot;schema&quot;: {
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;required&quot;: true,
+            &quot;description&quot;: &quot;Zip Code to validate&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Successfull Response&quot;,
+            &quot;content&quot;: {
+              &quot;application/json&quot;: {
+                &quot;schema&quot;: {
+                  &quot;type&quot;: &quot;object&quot;,
+                  &quot;properties&quot;: {
+                    &quot;post code&quot;: {
+                      &quot;type&quot;: &quot;string&quot;,
+                      &quot;example&quot;: &quot;90210&quot;
+                    },
+                    &quot;country&quot;: {
+                      &quot;type&quot;: &quot;string&quot;,
+                      &quot;example&quot;: &quot;United States&quot;
+                    },
+                    &quot;country abbreviation&quot;: {
+                      &quot;type&quot;: &quot;string&quot;,
+                      &quot;example&quot;: &quot;US&quot;
+                    },
+                    &quot;places&quot;: {
+                      &quot;type&quot;: &quot;array&quot;,
+                      &quot;items&quot;: {
+                        &quot;$ref&quot;: &quot;#/components/schemas/PlacesData&quot;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          &quot;404&quot;: {
+            &quot;description&quot;: &quot;When country or zip code are invalid&quot;,
+            &quot;content&quot;: {
+              &quot;application/json&quot;: {
+                &quot;schema&quot;: {
+                  &quot;type&quot;: &quot;object&quot;,
+                  &quot;example&quot;: {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  &quot;components&quot;: {
+    &quot;schemas&quot;: {
+      &quot;PlacesData&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+          &quot;place name&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;example&quot;: &quot;Beverly Hills&quot;
+          },
+          &quot;longitude&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;example&quot;: &quot;-118.4065&quot;
+          },
+          &quot;state&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;example&quot;: &quot;California&quot;
+          },
+          &quot;state abbreviation&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;example&quot;: &quot;CA&quot;
+          },
+          &quot;latitude&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;example&quot;: &quot;34.0901&quot;
+          }
+        }
+      }
+    }
+  }
+}</schema>
+    <schemaType>OpenApi3</schemaType>
+    <serviceBinding>{&quot;host&quot;:&quot;api.zippopotam.us&quot;,&quot;basePath&quot;:&quot;/&quot;,&quot;allowedSchemes&quot;:[&quot;HTTPS&quot;],&quot;requestMediaTypes&quot;:[],&quot;responseMediaTypes&quot;:[],&quot;compatibleMediaTypes&quot;:{}}</serviceBinding>
+    <status>Complete</status>
+    <systemVersion>5</systemVersion>
+</ExternalServiceRegistration>
