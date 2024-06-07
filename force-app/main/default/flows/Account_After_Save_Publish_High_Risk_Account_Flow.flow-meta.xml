@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <customErrors>
+        <name>Handle_Event_Error</name>
+        <label>Handle Event Error</label>
+        <locationX>440</locationX>
+        <locationY>431</locationY>
+        <customErrorMessages>
+            <errorMessage>High Risk Platform event couldn&apos;t be delivered, please reach out to tech support.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <description>If an account is set to High on its Risk field, will publish a platform event about it</description>
+    <environments>Default</environments>
+    <interviewLabel>Account: After Save Publish High Risk Account Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account: After Save Publish High Risk Account Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Creates_High_Risk_Account_Event</name>
+        <label>Creates High Risk Account Event</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <faultConnector>
+            <targetReference>Handle_Event_Error</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Account_Id__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Account_Name__c</field>
+            <value>
+                <elementReference>$Record.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Account_Owner_Id__c</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>HighRiskAccount__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Creates_High_Risk_Account_Event</targetReference>
+        </connector>
+        <filterFormula>AND(
+    ISPICKVAL({!$Record.Risk__c}, &apos;High&apos;),
+    OR(
+         ISNEW(),
+         ISCHANGED({!$Record.Risk__c})
+    )
+)</filterFormula>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Platform event to notify for high risk accounts</description>
+    <eventType>HighVolume</eventType>
+    <label>High Risk Account</label>
+    <pluralLabel>High Risk Accounts</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>
